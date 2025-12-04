@@ -13,7 +13,7 @@ import numpy as np
 import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
-
+from PIL import Image
 
 def generate_synthetic_support_data(seed: int = 42) -> pd.DataFrame:
     """
@@ -126,6 +126,9 @@ def create_violinplot(df: pd.DataFrame, output_path: str = "chart.png") -> None:
     # Save as 512x512 PNG:
     #   8x8 inches * 64 dpi = 512x512 pixels
     plt.savefig(output_path, dpi=64, bbox_inches="tight")
+    img = Image.open(output_path)
+    img = img.resize((512, 512))
+    img.save(output_path)
     plt.close()
 
 
